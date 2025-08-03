@@ -735,6 +735,7 @@ ImprovedTube.videoId = (url = document.URL) => url.match(ImprovedTube.regex.vide
 ImprovedTube.videoTitle = function () { return document.title?.replace(/\s*-\s*YouTube$/, '') || movie_player.getVideoData().title || document.querySelector('#title > h1 > *')?.textContent };
 
 // Function to extract and store the number of subscribers
+
 // Feature: Show full subscriber count instead of abbreviated
 ImprovedTube.extractSubscriberCount = function (subscriberCountNode) {
 	if (!subscriberCountNode) {
@@ -758,6 +759,13 @@ ImprovedTube.extractSubscriberCount = function (subscriberCountNode) {
 		}
 
 		ImprovedTube.subscriberCount = fullCount;
+
+		// Debug output
+		console.log('[ImprovedTube] extractSubscriberCount:', {
+			abbreviatedText,
+			fullCount,
+			node: subscriberCountNode
+		});
 
 		// If option enabled, show full count
 		if (ImprovedTube.storage.show_full_subscriber_count === true && fullCount) {
